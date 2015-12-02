@@ -29,6 +29,58 @@ hello();
 // console.log(d);
 console.log(e);
 
+/**
+ * Callback functions
+ * Callback functions are those function which are passed
+ * as a parameter to another function.
+ */
+
+function done() {
+ console.log('Said hello');
+}
+
+function hi(name, cb) {
+  console.log('Hi there, ' + name + '!');
+  cb();
+}
+
+function sayHello(name, cb) {
+  cb(name, done);
+}
+
+sayHello('Vineel', hi);
+
+
+/**
+ * Closures
+ * A closure is a function within a function having the parent
+ * functions execution context/scope
+ */
+function orderPizza(x) {
+  function printPizza() {
+    console.log(x);
+  }
+  printPizza();
+}
+
+var anotherOrderPizza = orderPizza;
+anotherOrderPizza('Pepperoni');
+
+
+/**
+ * Currying
+ * A function which returns a closure/function within function.
+ */
+function whatPizza() {
+  return function yaayPizza() {
+    console.log('Yaay I love pizza');
+  };
+}
+
+var p = whatPizza();
+var c = whatPizza();
+p();
+c();
 
 /**
 * Ways to select DOM elements.
@@ -36,5 +88,4 @@ console.log(e);
 * 2. document.querySelector(y): Selects a DOM element with a class of y
 * 3. document.querySelectorAll(z): Selects a DOM element(s) with a class of z
 **/
-
 var content = document.getElementById('content');
