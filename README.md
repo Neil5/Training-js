@@ -1,2 +1,2 @@
 # training-app
-A simple application to demonstrate within training.
+A nifty app to teach during training.
