@@ -29,12 +29,30 @@ hello();
 // console.log(d);
 console.log(e);
 
+// Function declaration
+add(2, function saidHello() {
+  console.log('Printed hello');
+});
+
+function add(a, cb) {
+  setTimeout(function() {
+    console.log('Inner function');
+  }, 2000);
+  console.log(a);
+  cb();
+}
+
+// Function Expression
+var anotherAdd = function() {
+  console.log('Another function');
+};
+anotherAdd();
+
 /**
  * Callback functions
  * Callback functions are those function which are passed
  * as a parameter to another function.
  */
-
 function done() {
  console.log('Said hello');
 }
