@@ -107,3 +107,98 @@ c();
 * 3. document.querySelectorAll(z): Selects a DOM element(s) with a class of z
 **/
 var content = document.getElementById('content');
+
+/**
+ * This keyword
+ */
+console.log(this);
+
+function thisExplained(x) {
+  this.x = x;
+  this.log = function() {
+    console.log('Logging from class here with a value of ' + this.x);
+  }
+}
+
+console.log(thisExplained.x);
+var thisObj = new thisExplained(5);
+var thatObj = new thisExplained(6);
+thisObj.log(); // print 5
+thatObj.log(); // print 6
+console.log(thisObj);
+
+var obj = {
+  x: 6,
+  log: function() {
+   console.log('Logging from object here with a value of ' + this.x); // obj.x
+  }
+};
+console.log(obj);
+
+function anotherObj() {
+  this.hello = 'hello';
+}
+
+anotherObj.prototype = {
+  log: function() {
+    console.log('Logging from prototype');
+  }
+};
+var aobj = new anotherObj();
+aobj.log();
+
+/**
+ 1. Bind
+ 2. Apply
+ 3. Call
+ */
+this.x = 9;
+var module = {
+ x: 81,
+ getX: function() {
+   return this.x;
+ }
+};
+
+console.log(module.getX()); // 81
+
+var retrieveX = module.getX;
+console.log(retrieveX());
+
+var boundRetrieveX = retrieveX.bind(module);
+console.log(boundRetrieveX());
+
+
+/* min/max number in an array */
+var numbers = [5, 6, 2, 3, 7];
+
+var funcMax = Math.max.apply(numbers);
+var funcMin = Math.min.apply(numbers);
+console.log(funcMax, funcMin);
+
+var funcMaxBind = Math.max.bind(numbers);
+var funcMinBind = Math.min.bind(numbers);
+console.log(funcMaxBind(), funcMinBind());
+
+
+function hello(x) {
+  return this.x;
+}
+
+var y = {
+  x: 'From obj',
+  setX: function(x) {
+    this.x = x;
+  }
+};
+
+var msg = hello('Hello');
+var bindMsg = hello.bind(y, 'Hi there');
+console.log(msg);
+console.log(bindMsg());
+
+var applyMsg = hello.apply(y, ['Apply there']);
+console.log(applyMsg);
+
+var callMsg = hello.call(y, 'Call there');
+console.log(callMsg);
